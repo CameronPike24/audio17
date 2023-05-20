@@ -12,10 +12,10 @@ import os
  
  
  
-if not os.path.isdir("/sdcard/kivyrecords/"):
-    os.mkdir("/sdcard/kivyrecords/")
+if not os.path.isdir("/kivyrecords/"):
+    os.mkdir("/kivyrecords/")
  
-PATH = "/sdcard/kivyrecords/rec_test.wav"
+PATH = "/kivyrecords/rec_test.wav"
  
 recordtime = 5
 samples_per_second = 60
@@ -55,7 +55,9 @@ class Recorder(object):
         self.AudioRecord = autoclass('android.media.AudioRecord')
     # define our system
         self.SampleRate = 44100
+        #self.SampleRate = 16000 ; // 44100 for music
         self.ChannelConfig = self.AudioFormat.CHANNEL_IN_MONO
+        #self.ChannelConfig = self.AudioFormat.CHANNEL_CONFIGURATION_MONO;
         self.AudioEncoding = self.AudioFormat.ENCODING_PCM_16BIT
         self.BufferSize = self.AudioRecord.getMinBufferSize(self.SampleRate, self.ChannelConfig, self.AudioEncoding)
         self.outstream = self.FileOutputStream(PATH)
@@ -94,6 +96,7 @@ class RecordApp(App):
  
     def build(self):
         request_permissions([Permission.INTERNET, Permission.RECORD_AUDIO, Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE])
+        
         self.title = 'Recording Application'
  
 if __name__ == '__main__':
