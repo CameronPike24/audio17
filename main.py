@@ -96,16 +96,30 @@ class MainApp(App):
 
     def init_thread(self):
         print("def init_thread")
+        '''
         self.playback_thread = threading.Thread(target=self.app.player.run)
         # daemon threads don't wait for main thread
         self.playback_thread.setDaemon(True)
         self.playback_thread.start()
         print("Playback Thread", self.playback_thread.native_id, "started")
         print("Main Thread", threading.main_thread().native_id)
+        '''
+        REC.start()
+        Clock.schedule_once(self.stop_record, recordtime)
+        Clock.schedule_interval(self.update_display, 1/30.)        
+        
+        
+        
 
     def exit_thread(self):
+        '''
         self.playback_thread.join()
         print("Playback Thread", self.playback_thread.native_id, "stopped")
+        '''
+        Clock.unschedule(self.update_display)
+        self.p_bar.value = 0
+        REC.stop()
+        self.b_record.disabled = False
 
 class MainGrid(BoxLayout):
     
