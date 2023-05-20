@@ -12,10 +12,10 @@ import os
  
  
  
-if not os.path.isdir("/kivyrecords/"):
-    os.mkdir("/kivyrecords/")
+#if not os.path.isdir("/kivyrecords/"):
+#    os.mkdir("/kivyrecords/")
  
-PATH = "/kivyrecords/rec_test.wav"
+PATH = "rec_test.wav"
  
 recordtime = 5
 samples_per_second = 60
