@@ -38,7 +38,8 @@ class Recorder(object):
         self.BufferSize = self.AudioRecord.getMinBufferSize(self.SampleRate, self.ChannelConfig, self.AudioEncoding)
         #self.outstream = self.FileOutputStream(PATH)
         self.sData = []
-        self.mic = get_input(callback=self.mic_callback, source='mic', buffersize=self.BufferSize)
+        #self.mic = get_input(callback=self.mic_callback, source='mic', buffersize=self.BufferSize)
+        self.mic = get_input(callback=self.mic_callback, source='mic', buffersize=512)
  
     def mic_callback(self, buf):
         self.sData.append(buf)
