@@ -105,8 +105,8 @@ class MainApp(App):
         print("Main Thread", threading.main_thread().native_id)
         '''
         REC.start()
-        Clock.schedule_once(self.stop_record, recordtime)
-        Clock.schedule_interval(self.update_display, 1/30.)        
+        #Clock.schedule_once(self.stop_record, recordtime)
+        #Clock.schedule_interval(self.update_display, 1/30.)        
         
         
         
@@ -116,10 +116,10 @@ class MainApp(App):
         self.playback_thread.join()
         print("Playback Thread", self.playback_thread.native_id, "stopped")
         '''
-        Clock.unschedule(self.update_display)
-        self.p_bar.value = 0
+        #Clock.unschedule(self.update_display)
+        #self.p_bar.value = 0
         REC.stop()
-        self.b_record.disabled = False
+        #self.b_record.disabled = False
 
 class MainGrid(BoxLayout):
     
