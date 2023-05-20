@@ -38,8 +38,8 @@ class Recorder(object):
         self.BufferSize = self.AudioRecord.getMinBufferSize(self.SampleRate, self.ChannelConfig, self.AudioEncoding)
         #self.outstream = self.FileOutputStream(PATH)
         self.sData = []
-        #self.mic = get_input(callback=self.mic_callback, source='mic', buffersize=self.BufferSize)
-        self.mic = get_input(callback=self.mic_callback, source='mic', buffersize=512)
+        self.mic = get_input(callback=self.mic_callback, source='mic', buffersize=self.BufferSize)
+        #self.mic = get_input(callback=self.mic_callback, source='mic', buffersize=512)
  
     def mic_callback(self, buf):
         self.sData.append(buf)
@@ -80,7 +80,7 @@ class MainApp(App):
         print("request_permissions")
         #request_permissions([Permission.INTERNET, Permission.RECORD_AUDIO])
         
-        request_permissions([Permission.INTERNET, Permission.RECORD_AUDIO,Permission.READ_EXTERNAL_STORAGE,Permission.WRITE_EXTERNAL_STORAGE])
+        request_permissions([Permission.INTERNET, Permission.RECORD_AUDIO,Permission.READ_EXTERNAL_STORAGE,Permission.WRITE_EXTERNAL_STORAGE,Permission.STORAGE])
         self.app = MainGrid()       
         print("self.app = MainGrid()")
 
@@ -107,6 +107,7 @@ class MainApp(App):
         print("Main Thread", threading.main_thread().native_id)
         '''
         REC.start()
+        REC.prepare()
         #Clock.schedule_once(self.stop_record, recordtime)
         #Clock.schedule_interval(self.update_display, 1/30.)        
         
